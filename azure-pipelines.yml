@@ -4,7 +4,8 @@
 # https://aka.ms/yaml
 trigger:
 - master
-pool: MyPool
+pool: 
+  vmImage: 'ubuntu-latest'
 steps:
 - script: sbt clean
   displayName: 'Running $ sbt clean'
