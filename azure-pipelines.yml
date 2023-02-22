@@ -13,4 +13,4 @@ steps:
 - script: sbt compile
   displayName: 'Running $ sbt compile'
 - script: sbt test
-  displayName: 'Running $ sbt test'
+  displayName: 'Running $ sbt executable'
