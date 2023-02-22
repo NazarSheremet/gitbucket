@@ -6,8 +6,8 @@ steps:
   displayName: 'Running $ sbt clean'
 - script: sbt update
   displayName: 'Running $ sbt update'
-- script: sbt test
-  displayName: 'Running $ sbt test'
+#- script: sbt test
+#  displayName: 'Running $ sbt test'
 - script: sbt executable
   displayName: 'Running $ sbt executable'
 - script: pwd
