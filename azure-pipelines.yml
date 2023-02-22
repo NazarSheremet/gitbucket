@@ -10,7 +10,9 @@ steps:
   displayName: 'Running $ sbt clean'
 - script: sbt update
   displayName: 'Running $ sbt update'
-- script: sbt compile
-  displayName: 'Running $ sbt compile'
 - script: sbt test
+  displayName: 'Running $ sbt test'
+- script: sbt executable
   displayName: 'Running $ sbt executable'
+- script: pwd
+  displayName: 'Running $ pwd'
