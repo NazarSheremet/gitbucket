@@ -1,7 +1,3 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
 trigger:
 - master
 pool: Default
@@ -16,3 +12,14 @@ steps:
   displayName: 'Running $ sbt executable'
 - script: pwd
   displayName: 'Running $ pwd'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Azure for Students(3e3acbb9-1a34-409b-868f-db65dbca2e5b)'
+    appType: 'webAppLinux'
+    appName: 'gitbucket2'
+    deployToSlotOrASE: true
+    resourceGroupName: 'gitbucket2'
+    slotName: 'production'
+    package: '$(System.DefaultWorkingDirectory)/**/target/executable/gitbucket.war'
+    runtimeStack: 'TOMCAT|8.5-jre8'
