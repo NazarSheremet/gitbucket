@@ -1,4 +1,3 @@
-
 trigger:
 - main
 
@@ -26,28 +25,17 @@ stages:
     - bash: sbt test
       displayName: 'Test'
 
-  
-
-
-
-
-    # displayName: 'Running $ sbt clean'
-
-
-  # - script: sbt update
-  #   displayName: 'Running $ sbt update'
-  # #- script: sbt test
-  # #  displayName: 'Running $ sbt test'
-  # - script: sbt executable
-  #   displayName: 'Running $ sbt executable'
-
-
-
-# steps:
-# - script: echo Hello, world!
-#   displayName: 'Run a one-line script'
-
-# - script: |
-#     echo Add other tasks to build, test, and deploy your project.
-#     echo See https://aka.ms/yaml
-#   displayName: 'Run a multi-line script'
+- stage: 
+  displayName: Deploy stage
+  jobs:
+  - job: Deploy 
+    displayName: 'Deploy'
+    steps:
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'Azure for Students(3e3acbb9-1a34-409b-868f-db65dbca2e5b)'
+        appType: 'webAppLinux'
+        WebAppName: 'gitbucket2'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/**/target/executable/gitbucket.war'
+        RuntimeStack: 'TOMCAT|9.0-java11'
