@@ -13,13 +13,11 @@ steps:
 - script: pwd
   displayName: 'Running $ pwd'
 
-- task: AzureWebApp@1
+- task: AzureRmWebAppDeployment@4
   inputs:
+    ConnectionType: 'AzureRM'
     azureSubscription: 'Azure for Students(3e3acbb9-1a34-409b-868f-db65dbca2e5b)'
     appType: 'webAppLinux'
-    appName: 'gitbucket2'
-    deployToSlotOrASE: true
-    resourceGroupName: 'gitbucket2'
-    slotName: 'production'
-    package: '$(System.DefaultWorkingDirectory)/**/target/executable/gitbucket.war'
-    runtimeStack: 'TOMCAT|8.5-jre8'
+    WebAppName: 'gitbucket2'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    RuntimeStack: 'TOMCAT|9.0-java11'
