@@ -9,10 +9,14 @@ stages:
   displayName: Prebuild stage
   jobs:
   - job: Sbt_clean
-    displayName: 'Clean and Update sbt'
+    displayName: 'Clean sbt'
     steps:
     - bash: sbt clean
+  - job: Sbt_update
+    displayName: 'Update sbt'
+    steps:
     - bash: sbt update
+
 - stage: 
   displayName: Test stage
   jobs:
@@ -20,7 +24,7 @@ stages:
     displayName: 'Test'
     steps:
     - bash: sbt test
-
+      displayName: 'Test'
 
   
 
