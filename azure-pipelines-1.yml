@@ -1,19 +1,49 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
 
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
+pool: Default
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+- stage: 
+  displayName: Prebuild stage
+  jobs:
+  - job: Sbt_clean
+    displayName: 'Clean and Update sbt'
+    steps:
+    - bash: sbt clean
+    - bash: sbt update
+- stage: 
+  displayName: Test stage
+  jobs:
+  - job: Sbt_test
+    displayName: 'Test'
+    steps:
+    - bash: sbt test
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+
+  
+
+
+
+
+    # displayName: 'Running $ sbt clean'
+
+
+  # - script: sbt update
+  #   displayName: 'Running $ sbt update'
+  # #- script: sbt test
+  # #  displayName: 'Running $ sbt test'
+  # - script: sbt executable
+  #   displayName: 'Running $ sbt executable'
+
+
+
+# steps:
+# - script: echo Hello, world!
+#   displayName: 'Run a one-line script'
+
+# - script: |
+#     echo Add other tasks to build, test, and deploy your project.
+#     echo See https://aka.ms/yaml
+#   displayName: 'Run a multi-line script'
