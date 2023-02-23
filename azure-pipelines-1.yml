@@ -26,6 +26,15 @@ stages:
       displayName: 'Test'
 
 - stage: 
+  displayName: Build stage
+  jobs:
+  - job: Sbt_Build
+    displayName: 'Build'
+    steps:
+    - bash: sbt executable
+      displayName: 'Build'
+
+- stage: 
   displayName: Deploy stage
   jobs:
   - job: Deploy 
