@@ -1,5 +1,10 @@
 trigger:
 - main
+variables:
+  # Azure Resource Manager connection created during pipeline creation
+  azureSubscription: 'Azure for Students(3e3acbb9-1a34-409b-868f-db65dbca2e5b)'
+  # Web app name
+  webAppName: 'gitbucket2'
 
 pool: Default
 
@@ -52,8 +57,8 @@ stages:
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
-        azureSubscription: 'Azure for Students(3e3acbb9-1a34-409b-868f-db65dbca2e5b)'
+        azureSubscription: '$(azureSubscription)'
         appType: 'webAppLinux'
-        WebAppName: 'gitbucket2'
+        WebAppName: '$(webAppName)'
         packageForLinux: '$(Pipeline.Workspace)/drop/target/executable/gitbucket.war'
         RuntimeStack: 'TOMCAT|9.0-java11'
