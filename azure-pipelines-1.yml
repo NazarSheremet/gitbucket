@@ -40,16 +40,21 @@ stages:
         Contents: '**/target/executable/*.?(war|jar)'
         TargetFolder: $(Build.ArtifactStagingDirectory)
     
-    - upload: $(Build.ArtifactStagingDirectory)
+    - publish: $(Build.ArtifactStagingDirectory)
       artifact: drop
 
 - stage: 
   displayName: Deploy stage
   jobs:
-
   - job: Deploy 
     displayName: 'Deploy'
     steps:
+    - script: ls $(Build.ArtifactStagingDirectory)
+      displayName: 'Build'
+    - script: ls $(Pipeline.Workspace)
+      displayName: 'Build'
+    - script: pwd $(Pipeline.Workspace)
+      displayName: 'Build'
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
