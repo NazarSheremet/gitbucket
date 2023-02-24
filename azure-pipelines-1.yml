@@ -33,20 +33,28 @@ stages:
     steps:
     - script: sbt executable
       displayName: 'Build'
+    - task: CopyFiles@2
+      displayName: 'Copy Files to artifact staging directory'
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: '**/target/executable/*.?(war|jar)'
+        TargetFolder: $(Build.ArtifactStagingDirectory)
+    
+    - upload: $(Build.ArtifactStagingDirectory)
+      artifact: drop
 
+- stage: 
+  displayName: Deploy stage
+  jobs:
+
+  - job: Deploy 
+    displayName: 'Deploy'
+    steps:
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
         azureSubscription: 'Azure for Students(3e3acbb9-1a34-409b-868f-db65dbca2e5b)'
         appType: 'webAppLinux'
         WebAppName: 'gitbucket2'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/target/executable/gitbucket.war'
+        packageForLinux: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
         RuntimeStack: 'TOMCAT|9.0-java11'
-
-# - stage: 
-#   displayName: Deploy stage
-#   jobs:
-
-  # - job: Deploy 
-  #   displayName: 'Deploy'
-  #   steps:
