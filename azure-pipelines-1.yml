@@ -56,5 +56,5 @@ stages:
         azureSubscription: 'Azure for Students(3e3acbb9-1a34-409b-868f-db65dbca2e5b)'
         appType: 'webAppLinux'
         WebAppName: 'gitbucket2'
-        packageForLinux: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
+        packageForLinux: '$(Pipeline.Workspace)/drop/**/target/executable/*.?(war|jar)'
         RuntimeStack: 'TOMCAT|9.0-java11'
