@@ -10,26 +10,24 @@ stages:
   - job: Sbt_clean
     displayName: 'Clean sbt'
     steps:
-    - bash: sbt clean
+    - script: sbt clean
   - job: Sbt_update
     displayName: 'Update sbt'
     steps:
-    - bash: sbt update
+    - script: sbt update
 
-# - stage: 
-#   displayName: Test stage
-#   jobs:
-#   - job: Sbt_test
-#     displayName: 'Test'
-#     steps:
-#     - bash: sbt test
-#       displayName: 'Test'
+- stage: Test
+  displayName: Test stage
+  jobs:
+  - job: Sbt_test
+    displayName: 'Test'
+    steps:
+    - script: sbt test
 
-- stage: 
+- stage: Build
   displayName: Build stage
   jobs:
-  - job: Sbt_Build
-    displayName: 'Build'
+  - job: Build
     steps:
     - script: sbt executable
       displayName: 'Build'
@@ -43,25 +41,14 @@ stages:
     - publish: '$(Build.ArtifactStagingDirectory)'
       artifact: drop
 
-    - script: ls $(Pipeline.Workspace)
-      displayName: 'Build'
-    - script: pwd $(Pipeline.Workspace)
-      displayName: 'Build'
-
-- stage: 
+- stage: deploy
+  dependsOn: build
   displayName: Deploy stage
   jobs:
   - job: Deploy 
-    displayName: 'Deploy'
     steps:
     - download: current
       artifact: drop
-    - script: ls $(Build.ArtifactStagingDirectory)
-      displayName: 'Build'
-    - script: ls $(Pipeline.Workspace)
-      displayName: 'Build'
-    - script: pwd $(Pipeline.Workspace)
-      displayName: 'Build'
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
