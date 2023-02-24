@@ -31,7 +31,7 @@ stages:
   - job: Sbt_Build
     displayName: 'Build'
     steps:
-    - bash: sbt executable
+    - script: sbt executable
       displayName: 'Build'
   - job: Deploy 
     displayName: 'Deploy'
