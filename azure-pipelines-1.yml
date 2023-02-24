@@ -33,9 +33,7 @@ stages:
     steps:
     - script: sbt executable
       displayName: 'Build'
-  - job: Deploy 
-    displayName: 'Deploy'
-    steps:
+
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
@@ -48,3 +46,7 @@ stages:
 # - stage: 
 #   displayName: Deploy stage
 #   jobs:
+
+  # - job: Deploy 
+  #   displayName: 'Deploy'
+  #   steps:
