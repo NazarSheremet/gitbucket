@@ -54,6 +54,8 @@ stages:
   - job: Deploy 
     displayName: 'Deploy'
     steps:
+    - download: current
+      artifact: drop
     - script: ls $(Build.ArtifactStagingDirectory)
       displayName: 'Build'
     - script: ls $(Pipeline.Workspace)
