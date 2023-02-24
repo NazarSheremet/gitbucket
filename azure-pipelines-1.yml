@@ -37,11 +37,16 @@ stages:
       displayName: 'Copy Files to artifact staging directory'
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
-        Contents: '**/target/executable/*.?(war|jar)'
-        TargetFolder: $(Build.ArtifactStagingDirectory)
+        Contents: '**/target/executable/gitbucket.war'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
     
-    - publish: $(Build.ArtifactStagingDirectory)
+    - publish: '$(Build.ArtifactStagingDirectory)'
       artifact: drop
+
+    - script: ls $(Pipeline.Workspace)
+      displayName: 'Build'
+    - script: pwd $(Pipeline.Workspace)
+      displayName: 'Build'
 
 - stage: 
   displayName: Deploy stage
@@ -61,5 +66,5 @@ stages:
         azureSubscription: 'Azure for Students(3e3acbb9-1a34-409b-868f-db65dbca2e5b)'
         appType: 'webAppLinux'
         WebAppName: 'gitbucket2'
-        packageForLinux: '$(Pipeline.Workspace)/drop/**/target/executable/*.?(war|jar)'
+        packageForLinux: '$(Pipeline.Workspace)/drop/target/executable/gitbucket.war'
         RuntimeStack: 'TOMCAT|9.0-java11'
