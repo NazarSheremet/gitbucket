@@ -10,8 +10,6 @@ steps:
 #  displayName: 'Running $ sbt test'
 - script: sbt executable
   displayName: 'Running $ sbt executable'
-- script: pwd
-  displayName: 'Running $ pwd'
 
 - task: AzureRmWebAppDeployment@4
   inputs:
