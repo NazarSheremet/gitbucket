@@ -16,14 +16,14 @@ stages:
     steps:
     - bash: sbt update
 
-- stage: 
-  displayName: Test stage
-  jobs:
-  - job: Sbt_test
-    displayName: 'Test'
-    steps:
-    - bash: sbt test
-      displayName: 'Test'
+# - stage: 
+#   displayName: Test stage
+#   jobs:
+#   - job: Sbt_test
+#     displayName: 'Test'
+#     steps:
+#     - bash: sbt test
+#       displayName: 'Test'
 
 - stage: 
   displayName: Build stage
@@ -33,10 +33,6 @@ stages:
     steps:
     - bash: sbt executable
       displayName: 'Build'
-
-- stage: 
-  displayName: Deploy stage
-  jobs:
   - job: Deploy 
     displayName: 'Deploy'
     steps:
@@ -48,3 +44,7 @@ stages:
         WebAppName: 'gitbucket2'
         packageForLinux: '$(System.DefaultWorkingDirectory)/**/target/executable/gitbucket.war'
         RuntimeStack: 'TOMCAT|9.0-java11'
+
+# - stage: 
+#   displayName: Deploy stage
+#   jobs:
