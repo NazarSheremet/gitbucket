@@ -4,7 +4,7 @@ variables:
   # Azure Resource Manager connection created during pipeline creation
   azureSubscription: 'Azure for Students(3e3acbb9-1a34-409b-868f-db65dbca2e5b)'
   # Web app name
-  webAppName: 'gitbucket2'
+  webAppName: 'gitbucket'
 
 pool: Default
 
